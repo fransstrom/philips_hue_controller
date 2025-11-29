@@ -1,0 +1,2 @@
+source /home/frans/esp/remote-controller/build/bootloader/gdbinit/symbols
+source /home/frans/esp/remote-controller/build/bootloader/gdbinit/connect
