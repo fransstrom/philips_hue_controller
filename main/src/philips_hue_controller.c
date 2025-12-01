@@ -48,7 +48,6 @@ void log_resp(http_resp_t *resp) {
 
 void setHueState(int state) {
   esp_log_level_set("*", ESP_LOG_DEBUG);
-
   http_resp_t *resp = calloc(1, sizeof(*resp));
 
   if (!resp) {

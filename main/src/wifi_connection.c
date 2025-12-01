@@ -23,3 +23,8 @@ void connect_wifi() {
   ESP_LOGI(WIFI_TAG, "Primary Channel: %d", ap_info.primary);
   ESP_LOGI(WIFI_TAG, "RSSI: %d", ap_info.rssi);
 }
+
+void disconnect_wifi() {
+  ESP_LOGI(WIFI_TAG, "Disconnecting wifi ");
+  example_disconnect();
+}

@@ -6,8 +6,35 @@
 #include "freertos/FreeRTOS.h"
 #include "philips_hue_controller.h"
 #include "soc/gpio_num.h"
+#include <stdio.h>
 
 static QueueHandle_t ir_queue = NULL;
+void handleCode(uint32_t nec_code) {
+  switch (nec_code) {
+  case 0x00FFA25D:
+    int ledState = gpio_get_level(LED_PIN);
+    printf("LED STATE: %d\n", ledState);
+    if (ledState == 1) {
+      printf("turning fucking off\n");
+      gpio_set_level(LED_PIN, 0);
+      setHueState(0);
+    } else {
+      printf("turning fucking on\n");
+      gpio_set_level(LED_PIN, 1);
+      setHueState(1);
+    }
+    break;
+  case 0x00FF02FD:
+    printf("Turning birghtness up");
+    break;
+  case 0x00FF9867:
+    printf("Dimming light");
+    break;
+  default:
+    printf("CODE NOT SET UP YET\n");
+    break;
+  }
+}
 bool rmt_rx_done_callback(rmt_channel_handle_t channel,
                           const rmt_rx_done_event_data_t *edata,
                           void *user_data) {
@@ -58,22 +85,7 @@ void ir_rx_task(void *arg) {
       uint32_t nec_code = decode_nec(raw_symbols, rx_data.num_symbols);
       if (nec_code != 0) {
         ESP_LOGI(TAG, "NEC Code: 0x%08lX", nec_code);
-        if (nec_code == 0x00FFA25D) {
-          int ledState = gpio_get_level(LED_PIN);
-          printf("LED STATE: %d\n", ledState);
-          if (ledState == 1) {
-            printf("turning fucking off\n");
-            gpio_set_level(LED_PIN, 0);
-            setHueState(0);
-          } else {
-            printf("turning fucking on\n");
-
-            gpio_set_level(LED_PIN, 1);
-            setHueState(1);
-          }
-        }
-        // Control LED based on button press
-        // Example: if (nec_code == 0xFF18E7) { /* increase brightness */ }
+        handleCode(nec_code);
       }
       // Start receiving again for next signal
       ESP_ERROR_CHECK(rmt_receive(rx_channel, raw_symbols, sizeof(raw_symbols),

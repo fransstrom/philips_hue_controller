@@ -12,6 +12,7 @@ void ir_rx_task(void *arg);
 
 uint32_t decode_nec(rmt_symbol_word_t *symbols, size_t num_symbols);
 
+void handleCode(uint32_t nec_code);
 int testBuild();
 
 #endif // !IR_REVIEVER_H

@@ -14,5 +14,5 @@ void app_main(void) {
   printf("GOOD %s", TAG);
   setupLed();
   ir_receiver_init(IR_RX_GPIO);
-  // connect_wifi();
+  connect_wifi();
 }
