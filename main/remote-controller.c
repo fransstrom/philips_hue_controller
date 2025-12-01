@@ -3,6 +3,7 @@
 #include "config.h"
 #include "led_controller.h"
 #include "src/ir_reciever.h"
+#include "wifi_connection.h"
 #define LEDC_TIMER LEDC_TIMER_0
 #define LEDC_MODE LEDC_LOW_SPEED_MODE
 #define LEDC_CHANNEL LEDC_CHANNEL_0
@@ -11,7 +12,7 @@
 
 void app_main(void) {
   printf("GOOD %s", TAG);
-  printf("GOOD1 %d", testBuild());
   setupLed();
   ir_receiver_init(IR_RX_GPIO);
+  // connect_wifi();
 }

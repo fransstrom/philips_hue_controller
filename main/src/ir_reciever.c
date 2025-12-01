@@ -4,6 +4,7 @@
 #include "driver/rmt_rx.h"
 #include "esp_log.h"
 #include "freertos/FreeRTOS.h"
+#include "philips_hue_controller.h"
 #include "soc/gpio_num.h"
 
 static QueueHandle_t ir_queue = NULL;
@@ -61,12 +62,14 @@ void ir_rx_task(void *arg) {
           int ledState = gpio_get_level(LED_PIN);
           printf("LED STATE: %d\n", ledState);
           if (ledState == 1) {
-            printf("turning off\n");
+            printf("turning fucking off\n");
             gpio_set_level(LED_PIN, 0);
+            setHueState(0);
           } else {
+            printf("turning fucking on\n");
 
-            printf("turning on\n");
             gpio_set_level(LED_PIN, 1);
+            setHueState(1);
           }
         }
         // Control LED based on button press
