@@ -7,4 +7,9 @@ extern const gpio_num_t LED_PIN;
 extern const gpio_num_t IR_RX_GPIO;
 
 extern const char *TAG;
+
+extern const char WIFI_SSID[];
+extern const char WIFI_PASS[];
+extern const char HUE_ENDPOINT[];
+extern const char HUE_ENDPOINT_GROUP[];
 #endif // !CONFIG_H
