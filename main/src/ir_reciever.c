@@ -10,25 +10,43 @@
 
 static QueueHandle_t ir_queue = NULL;
 void handleCode(uint32_t nec_code) {
+  char *post_data;
   switch (nec_code) {
   case 0x00FFA25D:
     int ledState = gpio_get_level(LED_PIN);
     printf("LED STATE: %d\n", ledState);
     if (ledState == 1) {
+      post_data = "{\"on\":false}";
       printf("turning fucking off\n");
       gpio_set_level(LED_PIN, 0);
-      setHueState(0);
+      setHueState(post_data);
     } else {
       printf("turning fucking on\n");
       gpio_set_level(LED_PIN, 1);
-      setHueState(1);
+      post_data = "{\"on\":true}";
+      setHueState(post_data);
     }
     break;
   case 0x00FF02FD:
     printf("Turning birghtness up");
+
+    post_data = "{\"bri_inc\":50}";
+    setHueState(post_data);
     break;
   case 0x00FF9867:
     printf("Dimming light");
+    post_data = "{\"bri_inc\":-50}";
+    setHueState(post_data);
+    break;
+  case 0X00FF906F:
+    printf("increasing hue\n");
+    post_data = "{\"hue_inc\":6400}";
+    setHueState(post_data);
+  case 0x00FFE01F:
+    printf("decrasing hue\n");
+
+    post_data = "{\"hue_inc\":6400}";
+    setHueState(post_data);
     break;
   default:
     printf("CODE NOT SET UP YET\n");

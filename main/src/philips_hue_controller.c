@@ -46,7 +46,7 @@ void log_resp(http_resp_t *resp) {
   cJSON_Delete(root);
 }
 
-void setHueState(int state) {
+void setHueState(char post_data[]) {
   esp_log_level_set("*", ESP_LOG_DEBUG);
   http_resp_t *resp = calloc(1, sizeof(*resp));
 
@@ -84,7 +84,6 @@ void setHueState(int state) {
     return;
   }
 
-  char *post_data = (state == 1) ? "{\"on\":true}" : "{\"on\":false}";
   int datalen = strlen(post_data);
   esp_http_client_set_url(client, HUE_ENDPOINT_GROUP);
   esp_http_client_set_method(client, HTTP_METHOD_PUT);
