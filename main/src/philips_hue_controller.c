@@ -46,7 +46,7 @@ void log_resp(http_resp_t *resp) {
   cJSON_Delete(root);
 }
 
-void setHueState(char post_data[]) {
+void setHueState(const char *url, const char *post_data) {
   esp_log_level_set("*", ESP_LOG_DEBUG);
   http_resp_t *resp = calloc(1, sizeof(*resp));
 
@@ -68,7 +68,7 @@ void setHueState(char post_data[]) {
   }
 
   esp_http_client_config_t config = {
-      .url = HUE_ENDPOINT_GROUP,
+      .url = url,
       // .event_handler = _http_event_handler,
       .user_data = resp,
       .disable_auto_redirect = true,
@@ -85,7 +85,7 @@ void setHueState(char post_data[]) {
   }
 
   int datalen = strlen(post_data);
-  esp_http_client_set_url(client, HUE_ENDPOINT_GROUP);
+  esp_http_client_set_url(client, url);
   esp_http_client_set_method(client, HTTP_METHOD_PUT);
   esp_http_client_set_header(client, "Content-Type", "application/json");
   esp_http_client_set_post_field(client, post_data, datalen);

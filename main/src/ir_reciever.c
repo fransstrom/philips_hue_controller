@@ -10,7 +10,8 @@
 
 static QueueHandle_t ir_queue = NULL;
 void handleCode(uint32_t nec_code) {
-  char *post_data;
+  const char *post_data;
+  const char *endpoint;
   switch (nec_code) {
   case 0x00FFA25D:
     int ledState = gpio_get_level(LED_PIN);
@@ -19,40 +20,44 @@ void handleCode(uint32_t nec_code) {
       post_data = "{\"on\":false}";
       printf("turning fucking off\n");
       gpio_set_level(LED_PIN, 0);
-      setHueState(post_data);
+      endpoint = HUE_ENDPOINT_GROUP_5;
+      setHueState(endpoint, post_data);
     } else {
       printf("turning fucking on\n");
       gpio_set_level(LED_PIN, 1);
       post_data = "{\"on\":true}";
-      setHueState(post_data);
+      setHueState(HUE_ENDPOINT_GROUP_5, post_data);
     }
     break;
   case 0x00FF02FD:
     printf("Turning birghtness up");
-
     post_data = "{\"bri_inc\":50}";
-    setHueState(post_data);
+    setHueState(HUE_ENDPOINT_GROUP_5, post_data);
     break;
   case 0x00FF9867:
     printf("Dimming light");
     post_data = "{\"bri_inc\":-50}";
-    setHueState(post_data);
+    setHueState(HUE_ENDPOINT_GROUP_5, post_data);
     break;
   case 0X00FF906F:
     printf("increasing hue\n");
     post_data = "{\"hue_inc\":6400}";
-    setHueState(post_data);
+    setHueState(HUE_ENDPOINT_GROUP_5, post_data);
+    break;
   case 0x00FFE01F:
     printf("decrasing hue\n");
-
     post_data = "{\"hue_inc\":6400}";
-    setHueState(post_data);
+    setHueState(HUE_ENDPOINT_GROUP_5, post_data);
+    break;
+  case 0x00FFE01D:
+    // 1,2,3,4,5 etc
     break;
   default:
     printf("CODE NOT SET UP YET\n");
     break;
   }
 }
+
 bool rmt_rx_done_callback(rmt_channel_handle_t channel,
                           const rmt_rx_done_event_data_t *edata,
                           void *user_data) {

@@ -11,5 +11,5 @@ extern const char *TAG;
 extern const char WIFI_SSID[];
 extern const char WIFI_PASS[];
 extern const char HUE_ENDPOINT[];
-extern const char HUE_ENDPOINT_GROUP[];
+extern const char HUE_ENDPOINT_GROUP_5[];
 #endif // !CONFIG_H
