@@ -1,6 +1,7 @@
 build/*
+main/build
 main/config.c
 #Ignoring sdkconfig since my wifi credentials is stored there when using the example for wifi connections
 sdkconfig
 sdkconfig.old
-
+.cache

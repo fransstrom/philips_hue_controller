@@ -12,4 +12,9 @@ extern const char WIFI_SSID[];
 extern const char WIFI_PASS[];
 extern const char HUE_ENDPOINT[];
 extern const char HUE_ENDPOINT_GROUP_5[];
+
+// To be implemented
+extern const char HUE_ENDPOINT_ALL[];
+// To be setup with night motion sensor
+extern const char HUE_ENDPOINT_HALL[];
 #endif // !CONFIG_H
