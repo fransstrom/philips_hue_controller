@@ -46,7 +46,7 @@ void handleCode(uint32_t nec_code) {
     break;
   case 0x00FFE01F:
     printf("decrasing hue\n");
-    post_data = "{\"hue_inc\":6400}";
+    post_data = "{\"hue_inc\":-6400}";
     setHueState(HUE_ENDPOINT_GROUP_5, post_data);
     break;
   case 0x00FFE01D:
@@ -142,5 +142,3 @@ void ir_receiver_init(gpio_num_t gpio_pin) {
 
   ESP_LOGI(TAG, "Initialized on GPIO %d", gpio_pin);
 }
-
-int testBuild() { return 10; }

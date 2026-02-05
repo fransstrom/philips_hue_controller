@@ -5,8 +5,10 @@
 extern const int IR_RESOLUTION_HZ;
 extern const gpio_num_t LED_PIN;
 extern const gpio_num_t IR_RX_GPIO;
+extern const gpio_num_t PIR_SENSOR_GPIO;
 
 extern const char *TAG;
+extern const char *TAG_PIR;
 
 extern const char WIFI_SSID[];
 extern const char WIFI_PASS[];
