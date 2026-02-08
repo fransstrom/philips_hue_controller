@@ -124,8 +124,11 @@ static void motion_detection_task(void *args) {
         setHueState(HUE_ENDPOINT_HALL, post_data);
         lights_on = false;
       }
+    } else {
+
+      // Should be an else statement here....
+      vTaskDelay(pdMS_TO_TICKS(60000)); // Check every minute when inactive
     }
-    vTaskDelay(pdMS_TO_TICKS(60000)); // Check every minute when inactive
   }
 }
 
