@@ -18,12 +18,12 @@ void handleCode(uint32_t nec_code) {
     printf("LED STATE: %d\n", ledState);
     if (ledState == 1) {
       post_data = "{\"on\":false}";
-      printf("turning fucking off\n");
+      printf("turning off\n");
       gpio_set_level(LED_PIN, 0);
       endpoint = HUE_ENDPOINT_GROUP_5;
       setHueState(endpoint, post_data);
     } else {
-      printf("turning fucking on\n");
+      printf("turning on\n");
       gpio_set_level(LED_PIN, 1);
       post_data = "{\"on\":true}";
       setHueState(HUE_ENDPOINT_GROUP_5, post_data);
