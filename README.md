@@ -1,20 +1,22 @@
 # philips_hue_controller
 
-ESP32-styrning av Philips Hue via MQTT och Hue API v1.
+ESP32-based Philips Hue control over MQTT using the Hue API v1.
 
-Koden är skriven så att det ska vara enkelt att bygga ut med nya funktioner eller kommunikationsprotokoll.
+The code is structured to make it easy to add new functionality
+or communication protocols.
 
-## Komma igång
+## Getting started
 
-Kräver ESP-IDF. Exportera och bygg:
+You'll need the ESP-IDF:
 
 ```
 . $HOME/esp/esp-idf/export.sh
+idf.py menuconfig    # WiFi only
 idf.py build flash monitor
+Create a `config.c` based on `config.h` with your Hue Bridge,
+MQTT and GPIO settings.
 ```
-
-Konfiguration i `config.c` — där sätter du Hue Bridge, WiFi och MQTT.
 
 ## Status
 
-Pågående hobbyprojekt.
+Ongoing hobby project.
